@@ -6,8 +6,7 @@ print('''
             #########################################################################
 ''')
 
-#retrieve values IP
-
+#fonction to verify IP adress
 def validate_ip(ip_adresse): 
     regex_ip = r'^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}$'
     if not re.match(regex_ip, ip_adresse):
@@ -23,15 +22,14 @@ def validate_ip(ip_adresse):
     
     return True
 
-def check_ip():
-    ip_address = input("Entrez l'addresse réseau >>>  ")
-    while not validate_ip(ip_address):
-       ip_address = input("Invalide IP \nEntrez l'addresse réseau >>>  ")
-    print("Adresse Réseau: ",ip_address) 
-
-check_ip()
+#Retrieve IP adress
+ip_address = input("Entrez l'addresse réseau >>>  ")
+while not validate_ip(ip_address):
+    ip_address = input("Invalide IP \nEntrez l'addresse réseau >>>  ")
 
 
+
+#fonction to verify mask Ip adress
 def validate_mask(mask_add):
     regex_mask = r'2{1}55.\d{1,3}.\d{1,3}.\d{1,3}$'
     if not re.match(regex_mask, mask_add):
@@ -46,25 +44,25 @@ def validate_mask(mask_add):
         return False
     return True
 
-def mask_recup():
-    mask_add = input("Entrez le masque >>  ")
-    while not validate_ip(mask_add):
-       mask_add = input("Invalide Masque \nEntrez le masque >>  ")
+#retrieve mask IP adress 
+mask_add = input("Entrez le masque >>  ")
+while not validate_ip(mask_add):
+    mask_add = input("Invalide Masque \nEntrez le masque >>  ")
 
-    mask_list = {
-        '255.0.0.0': '/8', '255.128.0.0': '/9', '255.192.0.0': '/10', '255.224.0.0': '/11', '255.240.0.0': '/12', '255.248.0.0': '/13', '255.252.0.0': '/14', '255.254.0.0': '/15', '255.255.0.0': '/16', 
-        '255.255.128.0': '/17', '255.255.192.0': '/18', '255.255.224.0': '/19', '255.255.240.0': '/20', '255.255.248.0': '/21', '255.255.252.0': '/22', '255.255.254.0': '/23', '255.255.255.0': '/24',
-        '255.255.255.128': '/25', '255.255.255.192': '/26', '255.255.255.224': '/27', '255.255.255.240': '/28', '255.255.255.248': '/29', '255.255.255.252': '/30', '255.255.255.254': '/31', '255.255.255.255': '/32'
-    }
-    if mask_add in mask_list.keys():
-        element = mask_list[mask_add]
+mask_list = {
+    '255.0.0.0': '/8', '255.128.0.0': '/9', '255.192.0.0': '/10', '255.224.0.0': '/11', '255.240.0.0': '/12', '255.248.0.0': '/13', '255.252.0.0': '/14', '255.254.0.0': '/15', '255.255.0.0': '/16', 
+    '255.255.128.0': '/17', '255.255.192.0': '/18', '255.255.224.0': '/19', '255.255.240.0': '/20', '255.255.248.0': '/21', '255.255.252.0': '/22', '255.255.254.0': '/23', '255.255.255.0': '/24',
+    '255.255.255.128': '/25', '255.255.255.192': '/26', '255.255.255.224': '/27', '255.255.255.240': '/28', '255.255.255.248': '/29', '255.255.255.252': '/30', '255.255.255.254': '/31', '255.255.255.255': '/32'
+}
+if mask_add in mask_list.keys():
+    element = mask_list[mask_add]
 
-        print(element, "\n("+"Masque : ", mask_add+")")
-    else : 
-        print("Masque :"+mask_add)
+    print("Adresse Réseau: ", ip_address+element, "\n", element, "-->", mask_add)
+else : 
+    print("Adresse Réseau :", ip_address,"\nMasque :"+mask_add)
  
 
-mask_recup()
+
 
 #retrieve Number of subnet 
 nb_subnet = ''
